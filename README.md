@@ -2,10 +2,9 @@
 
 ## 1. Passos para começar
 
-
 ### Instalando as Dependências
 
-`npm install`
+`npm install` ou `npm i`
 
 ### Inicializando o Servidor
 
