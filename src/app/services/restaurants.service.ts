@@ -5,7 +5,8 @@ import 'rxjs/add/operator/map';
 
 import { Restaurant } from "app/models/restaurant.model";
 
-import  { environment } from 'environments/environment';
+import { environment } from 'environments/environment';
+import { ErrorHandler } from '../handler/error.handler';
 
 @Injectable()
 export class RestaurantsService {
@@ -14,8 +15,9 @@ export class RestaurantsService {
   constructor(private http: Http){}
 
   get Restaurants(): Observable<Restaurant[]> {
-    return this.http.get(`${this.env.MEAT_API}restaurants`)
-      .map(response => response.json());
+    return this.http.get(`${this.env.MEAT_API}restaurants1`)
+      .map(response => response.json())
+      .catch(ErrorHandler.handleError)
   }
 
 }
