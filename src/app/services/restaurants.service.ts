@@ -7,6 +7,7 @@ import { Restaurant } from "app/models/restaurant.model";
 
 import { environment } from 'environments/environment';
 import { ErrorHandler } from '../handler/error.handler';
+import { errorHandler } from "@angular/platform-browser/src/browser";
 
 @Injectable()
 export class RestaurantsService {
@@ -15,9 +16,15 @@ export class RestaurantsService {
   constructor(private http: Http){}
 
   get Restaurants(): Observable<Restaurant[]> {
-    return this.http.get(`${this.env.MEAT_API}restaurants1`)
+    return this.http.get(`${this.env.MEAT_API}restaurants`)
       .map(response => response.json())
       .catch(ErrorHandler.handleError)
+  }
+
+  restaurantsById(id: string): Observable<Restaurant>{
+    return this.http.get(`${this.env.MEAT_API}restaurants/${id}`)
+      .map(response => response.json())
+      .catch(ErrorHandler.handleError);
   }
 
 }
