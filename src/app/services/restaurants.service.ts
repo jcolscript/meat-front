@@ -4,10 +4,10 @@ import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 
 import { Restaurant } from "app/models/restaurant.model";
+import { MenuItem } from "app/models/menu-item.model";
 
 import { environment } from 'environments/environment';
 import { ErrorHandler } from '../handler/error.handler';
-import { errorHandler } from "@angular/platform-browser/src/browser";
 
 @Injectable()
 export class RestaurantsService {
@@ -29,6 +29,12 @@ export class RestaurantsService {
 
   reviewsOfRestaurant(id: string): Observable<any>{
     return this.http.get(`${this.env.MEAT_API}restaurants/${id}/reviews`)
+      .map(response => response.json())
+      .catch(ErrorHandler.handleError);
+  }
+
+  menuOfRestaurant(id: string): Observable<MenuItem[]> {
+    return this.http.get(`${this.env.MEAT_API}restaurants/${id}/menu`)
       .map(response => response.json())
       .catch(ErrorHandler.handleError);
   }
