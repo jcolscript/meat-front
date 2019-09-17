@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from  '@angular/forms'
 
 import { ROUTES } from './app.routes';
 
@@ -16,8 +17,11 @@ import { MenuComponent } from './components/restaurant-detail/menu/menu.componen
 import { ShoppingCartComponent } from './components/restaurant-detail/menu/shopping-cart/shopping-cart.component';
 import { MenuItemComponent } from './components/restaurant-detail/menu/menu-item/menu-item.component';
 import { ReviewsComponent } from './components/restaurant-detail/reviews/reviews.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 import { RestaurantsService } from './services/restaurants.service';
+import { ShoppingCartService } from './services/shopping-cart.service';
+import { from } from 'rxjs/observable/from';
 
 @NgModule({
   declarations: [
@@ -31,14 +35,20 @@ import { RestaurantsService } from './services/restaurants.service';
     MenuComponent,
     ShoppingCartComponent,
     MenuItemComponent,
-    ReviewsComponent
+    ReviewsComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
+    FormsModule,
     RouterModule.forRoot(ROUTES)
   ],
-  providers: [RestaurantsService],
+  providers: [
+    RestaurantsService,
+    ShoppingCartService,
+    {provide: LOCALE_ID, useValue: 'pt-br'}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

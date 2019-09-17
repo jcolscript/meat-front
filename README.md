@@ -1,5 +1,7 @@
 # Meat
 
+![Preview-Screens](https://jdrivedocs.blob.core.windows.net/docs/meat-app.png)
+
 ## 1. Passos para começar
 
 ### Instalando as Dependências
