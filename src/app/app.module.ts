@@ -18,10 +18,12 @@ import { ShoppingCartComponent } from './components/restaurant-detail/menu/shopp
 import { MenuItemComponent } from './components/restaurant-detail/menu/menu-item/menu-item.component';
 import { ReviewsComponent } from './components/restaurant-detail/reviews/reviews.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import { InputComponent } from './components/shared/input/input.component';
 
 import { RestaurantsService } from './services/restaurants.service';
 import { ShoppingCartService } from './services/shopping-cart.service';
 import { from } from 'rxjs/observable/from';
+
 
 @NgModule({
   declarations: [
@@ -36,7 +38,8 @@ import { from } from 'rxjs/observable/from';
     ShoppingCartComponent,
     MenuItemComponent,
     ReviewsComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    InputComponent
   ],
   imports: [
     BrowserModule,
