@@ -23,6 +23,7 @@ import { InputComponent } from './components/shared/input/input.component';
 import { RestaurantsService } from './services/restaurants.service';
 import { ShoppingCartService } from './services/shopping-cart.service';
 import { from } from 'rxjs/observable/from';
+import { RadioComponent } from './components/shared/radio/radio.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { from } from 'rxjs/observable/from';
     MenuItemComponent,
     ReviewsComponent,
     CheckoutComponent,
-    InputComponent
+    InputComponent,
+    RadioComponent
   ],
   imports: [
     BrowserModule,
