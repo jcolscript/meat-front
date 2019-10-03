@@ -1,5 +1,5 @@
 <div *ngFor="let option of options">
-  <label (click)="setValue(option.value)">
+  <label (click)="setValue(option.value)" style="cursor: pointer">
     <div class="iradio_flat-red" [class.checked]="option.value === value " aria-checked="false" aria-disabled="false"
       style="position: relative;">
       <ins class="iCheck-helper"
