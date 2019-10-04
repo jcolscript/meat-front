@@ -25,6 +25,7 @@ import { OrderItemsComponent } from './components/checkout/order-items/order-ite
 
 import { RestaurantsService } from './services/restaurants.service';
 import { ShoppingCartService } from './services/shopping-cart.service';
+import { OrderService } from './services/order.service';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { ShoppingCartService } from './services/shopping-cart.service';
   providers: [
     RestaurantsService,
     ShoppingCartService,
+    OrderService,
     {provide: LOCALE_ID, useValue: 'pt-br'}
   ],
   bootstrap: [AppComponent]
