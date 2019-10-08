@@ -17,12 +17,17 @@ export class CheckoutComponent implements OnInit {
     {label: 'Cartão de Débito', value: 'DEB'},
     {label: 'Vale Refeição', value: 'REF'}
   ]
+  public deliveryFee: number = 8;
 
   constructor(
     private orderService: OrderService
   ) { }
 
   ngOnInit() {
+  }
+
+  getitemsValue(): number {
+    return this.orderService.getitemsValue();
   }
 
   getCartItems() {
