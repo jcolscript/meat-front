@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { RadioOption } from 'app/models/radio-option.model';
 import { CartItem } from 'app/models/cart-tem.model';
@@ -21,7 +22,8 @@ export class CheckoutComponent implements OnInit {
   public deliveryFee: number = 8;
 
   constructor(
-    private orderService: OrderService
+    private orderService: OrderService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -52,6 +54,7 @@ export class CheckoutComponent implements OnInit {
       .map((item: CartItem) => new OrderItem(item.quantity, item.menuItem.id));
     this.orderService.sendOrder(order)
       .subscribe((orderId) => {
+        this.router.navigate(['/summary']);
         this.orderService.clear();
       })
     console.log(order);
