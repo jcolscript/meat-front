@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { RadioOption } from 'app/models/radio-option.model';
 import { CartItem } from 'app/models/cart-tem.model';
 import { OrderService } from 'app/services/order.service';
+import { Order, OrderItem } from 'app/models/order.model';
 
 @Component({
   selector: 'mt-checkout',
@@ -26,8 +27,8 @@ export class CheckoutComponent implements OnInit {
   ngOnInit() {
   }
 
-  getitemsValue(): number {
-    return this.orderService.getitemsValue();
+  getItemsValue(): number {
+    return this.orderService.getItemsValue();
   }
 
   getCartItems() {
@@ -44,6 +45,16 @@ export class CheckoutComponent implements OnInit {
 
   remove(item: CartItem) {
     this.orderService.remove(item);
+  }
+
+  sendOrder(order: Order) {
+    order.orderItems = this.getCartItems()
+      .map((item: CartItem) => new OrderItem(item.quantity, item.menuItem.id));
+    this.orderService.sendOrder(order)
+      .subscribe((orderId) => {
+        this.orderService.clear();
+      })
+    console.log(order);
   }
 
 }

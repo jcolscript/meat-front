@@ -3,8 +3,6 @@
 
 <section class="content">
   <section class="invoice">
-    {{form.valid}}
-    {{form.value | json}}
 
     <form #form="ngForm" novalidate>
       <div class="row">
@@ -31,7 +29,7 @@
         </div>
         <div class="col-sm-4 col-xs-6">
             <mt-input-container errorMessage="Dados inseridos estão invalidos" label="Complemento">
-                <input type="text" class="form-control" name="optional" ngModel placeholder="Complemento">
+                <input type="text" class="form-control" name="optionalAddress" ngModel placeholder="Complemento">
             </mt-input-container>
         </div>
         <!-- /.col -->
@@ -68,7 +66,7 @@
           <p class="lead">Frete e Total:</p>
           <mt-delivery-costs
           [deliveryFee]="deliveryFee"
-          [itemsValue]="getitemsValue()">
+          [itemsValue]="getItemsValue()">
           </mt-delivery-costs>
         </div>
         <!-- /.col -->
@@ -78,8 +76,12 @@
 
     <div class="row">
       <div class="col-xs-12">
-        <button href="order-summary.html" [disabled]="!form.valid || getCartItems().length === 0" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Concluir
-          Pedido
+        <button href="order-summary.html"
+          (click)="sendOrder(form.value)"
+          [disabled]="!form.valid || getCartItems().length === 0"
+          class="btn btn-success pull-right">
+            <i class="fa fa-credit-card"></i>
+            Concluir Pedido
         </button>
       </div>
     </div>
