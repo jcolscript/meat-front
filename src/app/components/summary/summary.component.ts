@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SummaryComponent implements OnInit {
 
+  public rated = false;
+
   constructor() { }
 
   ngOnInit() {

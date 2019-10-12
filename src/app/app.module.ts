@@ -28,6 +28,7 @@ import { ShoppingCartService } from './services/shopping-cart.service';
 import { OrderService } from './services/order.service';
 import { DeliveryCostsComponent } from './components/checkout/delivery-costs/delivery-costs.component';
 import { SummaryComponent } from './components/summary/summary.component';
+import { RatingComponent } from './components/shared/rating/rating.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { SummaryComponent } from './components/summary/summary.component';
     RadioComponent,
     OrderItemsComponent,
     DeliveryCostsComponent,
-    SummaryComponent
+    SummaryComponent,
+    RatingComponent
   ],
   imports: [
     BrowserModule,
