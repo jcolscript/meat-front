@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms'
 
 import { RadioOption } from 'app/models/radio-option.model';
 import { CartItem } from 'app/models/cart-tem.model';
@@ -14,19 +15,48 @@ import { Order, OrderItem } from 'app/models/order.model';
 export class CheckoutComponent implements OnInit {
 
   public cartItems: CartItem[]
+  public checkoutForm: FormGroup;
+  public orderData: Order;
+  public emailPattern =   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i;
+  public numberPattern = /^(0|[1-9][0-9]*)$/;
+  public deliveryFee: number = 8;
   public paymentOptions: RadioOption[] = [
     {label: 'Dinheiro', value: 'MON'},
     {label: 'Cartão de Débito', value: 'DEB'},
     {label: 'Vale Refeição', value: 'REF'}
-  ]
-  public deliveryFee: number = 8;
+  ];
 
   constructor(
     private orderService: OrderService,
     private router: Router,
+    private fb: FormBuilder
   ) { }
 
   ngOnInit() {
+    this.checkoutForm = this.fb.group({
+      name: this.fb.control('',[Validators.required, Validators.minLength(5)]),
+      email: this.fb.control('',[Validators.required, Validators.pattern(this.emailPattern)]),
+      emailConfimation: this.fb.control('', [Validators.required, Validators.pattern(this.emailPattern)]),
+      address: this.fb.control('', [Validators.required, Validators.minLength(5)]),
+      number: this.fb.control('', [Validators.required, Validators.pattern(this.numberPattern)]),
+      optionalAddress: this.fb.control(''),
+      paymentOption: this.fb.control('', [Validators.required])
+    }, {validator: CheckoutComponent.equalsTo});
+  }
+
+  static equalsTo(group: AbstractControl): {[key: string]: boolean} {
+    const email = group.get('email');
+    const emailConfimation = group.get('emailConfimation');
+
+    if (!email || !emailConfimation) {
+      return undefined
+    }
+
+    if (email.value != emailConfimation.value) {
+      return { emailsNotMatch: true }
+    }
+
+    return undefined
   }
 
   getItemsValue(): number {
