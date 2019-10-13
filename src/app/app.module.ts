@@ -15,14 +15,12 @@ import { MenuComponent } from './components/restaurant-detail/menu/menu.componen
 import { ShoppingCartComponent } from './components/restaurant-detail/menu/shopping-cart/shopping-cart.component';
 import { MenuItemComponent } from './components/restaurant-detail/menu/menu-item/menu-item.component';
 import { ReviewsComponent } from './components/restaurant-detail/reviews/reviews.component';
-import { CheckoutComponent } from './components/checkout/checkout.component';
-import { OrderItemsComponent } from './components/checkout/order-items/order-items.component';
+import { SummaryComponent } from './components/summary/summary.component';
 
 import { RestaurantsService } from './services/restaurants.service';
 import { ShoppingCartService } from './services/shopping-cart.service';
 import { OrderService } from './services/order.service';
-import { DeliveryCostsComponent } from './components/checkout/delivery-costs/delivery-costs.component';
-import { SummaryComponent } from './components/summary/summary.component';
+
 import { SharedModule } from './modules/shared.module';
 
 @NgModule({
@@ -37,9 +35,6 @@ import { SharedModule } from './modules/shared.module';
     ShoppingCartComponent,
     MenuItemComponent,
     ReviewsComponent,
-    CheckoutComponent,
-    OrderItemsComponent,
-    DeliveryCostsComponent,
     SummaryComponent,
   ],
   imports: [
