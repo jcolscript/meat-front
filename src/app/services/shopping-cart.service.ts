@@ -15,6 +15,7 @@ export class ShoppingCartService {
 
   clear() {
     this.items = [];
+    this.notificationService.notify(`Você limpou o carrinho`);
   }
 
   addItem(item: MenuItem) {
