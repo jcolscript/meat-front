@@ -20,5 +20,5 @@ export const ROUTES: Routes = [
   },
   { path: 'checkout', component: CheckoutComponent },
   { path: 'summary', component: SummaryComponent },
-  { path: 'about', component: AboutComponent }
+  { path: 'about', loadChildren: './modules/about.module#AboutModule' }
 ]
