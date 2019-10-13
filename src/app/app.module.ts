@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { RouterModule, PreloadAllModules } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 import { ROUTES } from './app.routes';
 
@@ -17,8 +18,9 @@ import { MenuItemComponent } from './components/restaurant-detail/menu/menu-item
 import { ReviewsComponent } from './components/restaurant-detail/reviews/reviews.component';
 import { SummaryComponent } from './components/summary/summary.component';
 
-import { SharedModule } from './modules/shared.module';
-import { CoreModule } from './modules/core.module';
+import { SharedModule } from './components/shared/shared.module';
+import { CoreModule } from './core/core.module';
+
 
 @NgModule({
   declarations: [
@@ -39,6 +41,7 @@ import { CoreModule } from './modules/core.module';
     HttpModule,
     SharedModule,
     CoreModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot(ROUTES, { preloadingStrategy: PreloadAllModules})
   ],
   providers: [

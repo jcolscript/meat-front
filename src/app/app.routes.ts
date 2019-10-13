@@ -1,11 +1,9 @@
 import { Routes } from "@angular/router";
 import { HomeComponent } from "./components/home/home.component";
-import { AboutComponent } from "./components/about/about.component";
 import { RestaurantsComponent } from "./components/restaurants/restaurants.component";
 import { RestaurantDetailComponent } from "./components/restaurant-detail/restaurant-detail.component";
 import { MenuComponent } from "./components/restaurant-detail/menu/menu.component";
 import { ReviewsComponent } from "./components/restaurant-detail/reviews/reviews.component";
-import { CheckoutComponent } from "./components/checkout/checkout.component";
 import { SummaryComponent } from "./components/summary/summary.component";
 
 export const ROUTES: Routes = [
@@ -18,7 +16,7 @@ export const ROUTES: Routes = [
       { path: 'reviews', component: ReviewsComponent }
     ]
   },
-  { path: 'checkout', loadChildren: './modules/checkout.module#CheckoutModule' },
+  { path: 'checkout', loadChildren: './components/checkout/checkout.module#CheckoutModule' },
   { path: 'summary', component: SummaryComponent },
-  { path: 'about', loadChildren: './modules/about.module#AboutModule' }
+  { path: 'about', loadChildren: './components/about/about.module#AboutModule' }
 ]
