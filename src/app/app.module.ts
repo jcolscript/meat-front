@@ -20,6 +20,7 @@ import { SummaryComponent } from './components/summary/summary.component';
 
 import { SharedModule } from './components/shared/shared.module';
 import { CoreModule } from './core/core.module';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { CoreModule } from './core/core.module';
     MenuItemComponent,
     ReviewsComponent,
     SummaryComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
