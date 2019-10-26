@@ -1,14 +1,16 @@
-import { Routes } from "@angular/router";
-import { HomeComponent } from "./components/home/home.component";
-import { RestaurantsComponent } from "./components/restaurants/restaurants.component";
-import { RestaurantDetailComponent } from "./components/restaurant-detail/restaurant-detail.component";
-import { MenuComponent } from "./components/restaurant-detail/menu/menu.component";
-import { ReviewsComponent } from "./components/restaurant-detail/reviews/reviews.component";
-import { SummaryComponent } from "./components/summary/summary.component";
-import { NotFoundComponent } from "./components/not-found/not-found.component";
+import { Routes } from '@angular/router';
+import { HomeComponent } from './components/home/home.component';
+import { RestaurantsComponent } from './components/restaurants/restaurants.component';
+import { RestaurantDetailComponent } from './components/restaurant-detail/restaurant-detail.component';
+import { MenuComponent } from './components/restaurant-detail/menu/menu.component';
+import { ReviewsComponent } from './components/restaurant-detail/reviews/reviews.component';
+import { SummaryComponent } from './components/summary/summary.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { LoginComponent } from './components/security/login/login.component';
 
 export const ROUTES: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'restaurants', component: RestaurantsComponent },
   { path: 'restaurants/:id', component: RestaurantDetailComponent,
     children: [

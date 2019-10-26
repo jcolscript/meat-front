@@ -15,7 +15,7 @@ export const authentication = (req: Request, res: Response) => {
 };
 
 function isValid(user: User): boolean {
-  if(!user) {
+  if (!user) {
     return false;
   }
   const dbUser = users[user.email];
