@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms'
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 
 import { RadioOption } from 'app/models/radio-option.model';
 import { CartItem } from 'app/models/cart-tem.model';
