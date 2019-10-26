@@ -13,7 +13,7 @@ export class User {
 
 }
 
-export const users = {
+export const users: {[key: string]: User} = {
   'juliana@gmail.com': new User('juliana@gmail.com', 'Juliana', 'juliana123'),
   'maria@gmail.com': new User('maria@gmail.com', 'Maria', 'maria123'),
   'ana@gmail.com': new User('ana@gmail.com', 'Ana', 'ana123'),
