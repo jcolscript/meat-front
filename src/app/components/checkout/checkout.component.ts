@@ -35,8 +35,8 @@ export class CheckoutComponent implements OnInit {
 
   ngOnInit() {
     this.checkoutForm = this.fb.group({
-      name: this.fb.control('',[Validators.required, Validators.minLength(5)]),
-      email: this.fb.control('',[Validators.required, Validators.pattern(this.emailPattern)]),
+      name: this.fb.control('', [Validators.required, Validators.minLength(5)]),
+      email: this.fb.control('', [Validators.required, Validators.pattern(this.emailPattern)]),
       emailConfimation: this.fb.control('', [Validators.required, Validators.pattern(this.emailPattern)]),
       address: this.fb.control('', [Validators.required, Validators.minLength(5)]),
       number: this.fb.control('', [Validators.required, Validators.pattern(this.numberPattern)]),

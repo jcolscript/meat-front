@@ -4,6 +4,7 @@ import { ShoppingCartService } from 'app/services/shopping-cart.service';
 import { OrderService } from 'app/services/order.service';
 import { RestaurantsService } from 'app/services/restaurants.service';
 import { NotificationService } from 'app/services/notification.service';
+import { LoginService } from 'app/services/login.service';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { NotificationService } from 'app/services/notification.service';
     ShoppingCartService,
     OrderService,
     RestaurantsService,
-    NotificationService
+    NotificationService,
+    LoginService
   ],
 })
 export class CoreModule {}
