@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import 'rxjs/add/operator/do';
 
 import { RadioOption } from 'app/models/radio-option.model';
 import { CartItem } from 'app/models/cart-tem.model';
@@ -21,6 +22,7 @@ export class CheckoutComponent implements OnInit {
   public emailPattern =   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i;
   public numberPattern = /^(0|[1-9][0-9]*)$/;
   public deliveryFee = 8;
+  public orderId: string;
   public paymentOptions: RadioOption[] = [
     {label: 'Dinheiro', value: 'MON'},
     {label: 'Cartão de Débito', value: 'DEB'},
@@ -33,6 +35,21 @@ export class CheckoutComponent implements OnInit {
     private fb: FormBuilder
   ) { }
 
+  static equalsTo(group: AbstractControl): {[key: string]: boolean} {
+    const email = group.get('email');
+    const emailConfimation = group.get('emailConfimation');
+
+    if (!email || !emailConfimation) {
+      return undefined;
+    }
+
+    if (email.value != emailConfimation.value) {
+      return { emailsNotMatch: true };
+    }
+
+    return undefined;
+  }
+
   ngOnInit() {
     this.checkoutForm = this.fb.group({
       name: this.fb.control('', [Validators.required, Validators.minLength(5)]),
@@ -43,21 +60,6 @@ export class CheckoutComponent implements OnInit {
       optionalAddress: this.fb.control(''),
       paymentOption: this.fb.control('', [Validators.required])
     }, {validator: CheckoutComponent.equalsTo});
-  }
-
-  static equalsTo(group: AbstractControl): {[key: string]: boolean} {
-    const email = group.get('email');
-    const emailConfimation = group.get('emailConfimation');
-
-    if (!email || !emailConfimation) {
-      return undefined
-    }
-
-    if (email.value != emailConfimation.value) {
-      return { emailsNotMatch: true }
-    }
-
-    return undefined
   }
 
   getItemsValue(): number {
@@ -80,10 +82,17 @@ export class CheckoutComponent implements OnInit {
     this.orderService.remove(item);
   }
 
+  isOrderCompleted(): boolean {
+    return this.orderId !== undefined;
+  }
+
   sendOrder(order: Order) {
     order.orderItems = this.getCartItems()
       .map((item: CartItem) => new OrderItem(item.quantity, item.menuItem.id));
     this.orderService.sendOrder(order)
+      .do((orderId) => {
+        this.orderId = orderId;
+      })
       .subscribe((orderId) => {
         this.router.navigate(['/summary']);
         this.orderService.clear();
