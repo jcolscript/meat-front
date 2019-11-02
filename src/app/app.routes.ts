@@ -22,7 +22,8 @@ export const ROUTES: Routes = [
     ]
   },
   { path: 'restaurants', component: RestaurantsComponent },
-  { path: 'checkout', canLoad: [LoggedInGuard], loadChildren: './components/checkout/checkout.module#CheckoutModule' },
+  { path: 'checkout', canLoad: [LoggedInGuard], canActivate: [LoggedInGuard],
+    loadChildren: './components/checkout/checkout.module#CheckoutModule' },
   { path: 'summary', component: SummaryComponent },
   { path: 'about', loadChildren: './components/about/about.module#AboutModule' },
   { path: '**', component: NotFoundComponent}
