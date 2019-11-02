@@ -8,10 +8,12 @@ import { SummaryComponent } from './components/summary/summary.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { LoginComponent } from './components/security/login/login.component';
 
+import { LoggedInGuard } from './components/security/loggedin.guard';
+
 export const ROUTES: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'restaurants', component: RestaurantsComponent },
+  { path: 'login/:to', component: LoginComponent },
   { path: 'restaurants/:id', component: RestaurantDetailComponent,
     children: [
       { path: '', redirectTo: 'menu', pathMatch: 'full'},
@@ -19,7 +21,8 @@ export const ROUTES: Routes = [
       { path: 'reviews', component: ReviewsComponent }
     ]
   },
-  { path: 'checkout', loadChildren: './components/checkout/checkout.module#CheckoutModule' },
+  { path: 'restaurants', component: RestaurantsComponent },
+  { path: 'checkout', canLoad: [LoggedInGuard], loadChildren: './components/checkout/checkout.module#CheckoutModule' },
   { path: 'summary', component: SummaryComponent },
   { path: 'about', loadChildren: './components/about/about.module#AboutModule' },
   { path: '**', component: NotFoundComponent}
