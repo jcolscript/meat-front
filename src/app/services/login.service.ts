@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/filter';
 
 import { User } from 'app/models/user.model';
 import { environment } from 'environments/environment';
@@ -11,11 +12,16 @@ import { environment } from 'environments/environment';
 export class LoginService {
   public env = environment;
   public user: User;
+  public actualUrl: string;
 
   constructor(
     private http: HttpClient,
     private router: Router
-  ) {}
+  ) {
+    this.router.events
+      .filter((e) => e instanceof NavigationEnd)
+      .subscribe((e: NavigationEnd) => this.actualUrl = e.url);
+  }
 
   isLoggedIn(): boolean {
     return this.user !== undefined;
@@ -26,7 +32,12 @@ export class LoginService {
       .do(user => this.user = user);
   }
 
-  handleLogin(path?: string) {
+  logout() {
+    this.user = undefined;
+    this.handleLogin('/');
+  }
+
+  handleLogin(path: string = this.actualUrl) {
     this.router.navigate(['/login', btoa(path)]);
   }
 }
