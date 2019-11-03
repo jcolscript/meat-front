@@ -7,6 +7,8 @@ import { NotificationService } from 'app/services/notification.service';
 import { LoginService } from 'app/services/login.service';
 import { LoggedInGuard } from 'app/components/security/loggedin.guard';
 import { LeaveCheckoutGuard } from 'app/components/checkout/leave-checkout.guard';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from 'app/components/security/auth.interceptor';
 
 
 @NgModule({
@@ -17,7 +19,8 @@ import { LeaveCheckoutGuard } from 'app/components/checkout/leave-checkout.guard
     NotificationService,
     LoginService,
     LoggedInGuard,
-    LeaveCheckoutGuard
+    LeaveCheckoutGuard,
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ],
 })
 export class CoreModule {}
