@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 
 import { ShoppingCartService } from './shopping-cart.service';
 import { CartItem } from 'app/models/cart-tem.model';
-import { Order, OrderItem } from 'app/models/order.model';
+import { Order } from 'app/models/order.model';
 import { environment } from 'environments/environment';
 import { LoginService } from './login.service';
 

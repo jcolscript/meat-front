@@ -7,7 +7,6 @@ import { Restaurant } from 'app/models/restaurant.model';
 import { MenuItem } from 'app/models/menu-item.model';
 
 import { environment } from 'environments/environment';
-import { ErrorHandler } from '../handler/error.handler';
 
 @Injectable()
 export class RestaurantsService {
@@ -20,19 +19,19 @@ export class RestaurantsService {
     if (search) {
       params = new HttpParams().set('q', search);
     }
-    return this.http.get<Restaurant[]>(`${this.env.MEAT_API}restaurants`, {params: params});
+    return this.http.get<Restaurant[]>(`${this.env.MEAT_API}restaurantss`, {params: params});
   }
 
   restaurantsById(id: string): Observable<Restaurant> {
-    return this.http.get<Restaurant>(`${this.env.MEAT_API}restaurants/${id}`)
+    return this.http.get<Restaurant>(`${this.env.MEAT_API}restaurants/${id}`);
   }
 
   reviewsOfRestaurant(id: string): Observable<any> {
-    return this.http.get(`${this.env.MEAT_API}restaurants/${id}/reviews`)
+    return this.http.get(`${this.env.MEAT_API}restaurants/${id}/reviews`);
   }
 
   menuOfRestaurant(id: string): Observable<MenuItem[]> {
-    return this.http.get<MenuItem[]>(`${this.env.MEAT_API}restaurants/${id}/menu`)
+    return this.http.get<MenuItem[]>(`${this.env.MEAT_API}restaurants/${id}/menu`);
   }
 
 }
