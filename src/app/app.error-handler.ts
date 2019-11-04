@@ -1,4 +1,4 @@
-import { ErrorHandler, Injectable, Injector } from '@angular/core';
+import { ErrorHandler, Injectable, Injector, NgZone } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { NotificationService } from './services/notification.service';
@@ -10,7 +10,8 @@ export class ApplicationErrorHandler extends ErrorHandler {
 
   constructor(
     private notificationService: NotificationService,
-    private injector: Injector
+    private injector: Injector,
+    private zone: NgZone
   ) {
     super();
   }
@@ -18,18 +19,20 @@ export class ApplicationErrorHandler extends ErrorHandler {
   handleError(errorResponse: HttpErrorResponse | any) {
     if (errorResponse instanceof HttpErrorResponse) {
       const message = errorResponse.error.message;
-      switch (errorResponse.status) {
-        case 401:
-          // tslint:disable-next-line: deprecation
-          this.injector.get(LoginComponent).login();
-          break;
-        case 403:
-          this.notificationService.notify(message || 'Não autorizado');
-          break;
-        case 404:
-          this.notificationService.notify(message || 'Recurso não encontrado');
-          break;
-      }
+      this.zone.run(() => {
+        switch (errorResponse.status) {
+          case 401:
+            // tslint:disable-next-line: deprecation
+            this.injector.get(LoginComponent).login();
+            break;
+          case 403:
+            this.notificationService.notify(message || 'Não autorizado');
+            break;
+          case 404:
+            this.notificationService.notify(message || 'Recurso não encontrado');
+            break;
+        }
+      });
     }
     super.handleError(errorResponse);
   }
