@@ -15,7 +15,7 @@ import { Order, OrderItem } from 'app/models/order.model';
 })
 export class CheckoutComponent implements OnInit {
 
-  public cartItems: CartItem[]
+  public cartItems: CartItem[];
   public checkoutForm: FormGroup;
   public orderData: Order;
   // tslint:disable-next-line: max-line-length
@@ -51,7 +51,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.checkoutForm = this.fb.group({
+    this.checkoutForm = new FormGroup({
       name: this.fb.control('', [Validators.required, Validators.minLength(5)]),
       email: this.fb.control('', [Validators.required, Validators.pattern(this.emailPattern)]),
       emailConfimation: this.fb.control('', [Validators.required, Validators.pattern(this.emailPattern)]),
@@ -59,7 +59,7 @@ export class CheckoutComponent implements OnInit {
       number: this.fb.control('', [Validators.required, Validators.pattern(this.numberPattern)]),
       optionalAddress: this.fb.control(''),
       paymentOption: this.fb.control('', [Validators.required])
-    }, {validator: CheckoutComponent.equalsTo});
+    }, {validators: [CheckoutComponent.equalsTo], updateOn: 'blur'});
   }
 
   getItemsValue(): number {
@@ -96,7 +96,7 @@ export class CheckoutComponent implements OnInit {
       .subscribe((orderId) => {
         this.router.navigate(['/summary']);
         this.orderService.clear();
-      })
+      });
     console.log(order);
   }
 
