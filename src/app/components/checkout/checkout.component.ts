@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
-import 'rxjs/add/operator/do';
+import { tap } from 'rxjs/operators';
 
 import { RadioOption } from 'app/models/radio-option.model';
 import { CartItem } from 'app/models/cart-tem.model';
 import { OrderService } from 'app/services/order.service';
 import { Order, OrderItem } from 'app/models/order.model';
+import { from } from 'rxjs';
 
 @Component({
   selector: 'mt-checkout',
@@ -90,9 +91,11 @@ export class CheckoutComponent implements OnInit {
     order.orderItems = this.getCartItems()
       .map((item: CartItem) => new OrderItem(item.quantity, item.menuItem.id));
     this.orderService.sendOrder(order)
-      .do((orderId) => {
-        this.orderId = orderId;
-      })
+      .pipe(
+        tap((orderId) => {
+          this.orderId = orderId;
+        })
+      )
       .subscribe((orderId) => {
         this.router.navigate(['/summary']);
         this.orderService.clear();

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import 'rxjs/add/operator/map';
+import { tap } from 'rxjs/operators';
 
 import { Restaurant } from 'app/models/restaurant.model';
 import { MenuItem } from 'app/models/menu-item.model';
